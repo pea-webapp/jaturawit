@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>พิกัดมิเตอร์และหม้อแปลง</title>
+</head>
+<body>
+  <h3>พิกัดมิเตอร์และหม้อแปลง</h3>
+  <form id="meterForm">
+    <input type="text" id="meterId" placeholder="รหัสมิเตอร์" required>
+    <input type="text" id="location" placeholder="ตำแหน่ง" required>
+    <button type="submit">บันทึก</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("meterForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const data = {
+        action: "meter",
+        meterId: document.getElementById("meterId").value,
+        location: document.getElementById("location").value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbzipTwJzmRZWCLpYFauUX7ZhXlveoeFey5lDwhhdRo/dev", {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").innerText = data.status;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+fetch("https://script.google.com/macros/s/AKfycbzipTwJzmRZWCLpYFauUX7ZhXlveoeFey5lDwhhdRo/dev", {
+  method: "POST",
+  body: JSON.stringify({action: "status", meterId: "12345"})
+})

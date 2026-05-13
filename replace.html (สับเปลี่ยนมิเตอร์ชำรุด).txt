@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>สับเปลี่ยนมิเตอร์ชำรุด</title>
+</head>
+<body>
+  <h3>สับเปลี่ยนมิเตอร์ชำรุด</h3>
+  <form id="replaceForm">
+    <input type="text" id="oldMeter" placeholder="รหัสมิเตอร์เดิม" required>
+    <input type="text" id="newMeter" placeholder="รหัสมิเตอร์ใหม่" required>
+    <button type="submit">บันทึก</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("replaceForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const data = {
+        action: "replace",
+        oldMeter: document.getElementById("oldMeter").value,
+        newMeter: document.getElementById("newMeter").value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbzipTwJzmRZWCLpYFauUX7ZhXlveoeFey5lDwhhdRo/dev", {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").innerText = data.status;
+      });
+    });
+  </script>
+</body>
+</html>
